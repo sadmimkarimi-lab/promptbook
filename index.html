@@ -35,21 +35,21 @@
       flex-wrap: wrap;
     }
 
-.hero-cover {
-  width: 180px; /* عرض دلخواه، می‌تونی کم/زیاد کنی */
-  aspect-ratio: 464 / 600; /* نسبت واقعی عکس */
-  border-radius: 16px;
-  overflow: hidden;
-  background: #e5e7eb;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-  flex-shrink: 0;
-}
+    .hero-cover {
+      width: 180px;                 /* عرض قاب */
+      aspect-ratio: 464 / 600;      /* نسبت واقعی جلد */
+      border-radius: 16px;
+      overflow: hidden;
+      background: #e5e7eb;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+      flex-shrink: 0;
+    }
 
-.hero-cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* بدون کشیدگی */
-}
+    .hero-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;            /* بدون کشیدگی */
+    }
 
     .hero-text {
       flex: 1;
@@ -244,9 +244,9 @@
         align-items: flex-start;
       }
 
+      /* فقط عرض رو کوچیک می‌کنیم، height رو دست نمی‌زنیم */
       .hero-cover {
-        width: 110px;
-        height: 160px;
+        width: 150px;
       }
 
       .hero-text h1 {
@@ -261,8 +261,8 @@
     <!-- هدر و کاور کتاب -->
     <header class="hero">
       <div class="hero-cover">
-        <!-- عکس جلد کتابت رو اینجا بذار -->
-      <img src="https://cdnfa.com/irangiah/a9be/uploads/ketab/propm.webp" alt="جلد کتاب">
+        <!-- عکس جلد کتاب -->
+        <img src="https://cdnfa.com/irangiah/a9be/uploads/ketab/propm.webp" alt="جلد کتاب">
       </div>
 
       <div class="hero-text">
@@ -381,8 +381,6 @@
               اینجا متن مبحث دوم فصل اول است...
             </p>
           </section>
-
-          <!-- در صورت نیاز مبحث‌های بیشتری اضافه کن -->
         </div>
       </article>
 
