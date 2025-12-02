@@ -331,30 +331,67 @@
 </li>
 
         <!-- فصل دوم -->
-        <li class="toc-chapter" data-chapter="chapter-2">
-          <div class="toc-chapter-header">
-            <div class="toc-chapter-title">فصل دوم: عنوان فصل دوم</div>
-            <div class="toc-chapter-toggle">＋</div>
-          </div>
-          <ul class="toc-section-list">
-            <li class="toc-section-item">
-              <button class="toc-btn section-btn"
-                      data-chapter="chapter-2"
-                      data-section="section-2-1">
-                <span>مبحث ۱: عنوان مبحث اول فصل دوم</span>
-                <small>مثلاً ۴ صفحه</small>
-              </button>
-            </li>
-            <li class="toc-section-item">
-              <button class="toc-btn section-btn"
-                      data-chapter="chapter-2"
-                      data-section="section-2-2">
-                <span>مبحث ۲: عنوان مبحث دوم فصل دوم</span>
-                <small>مثلاً ۵ صفحه</small>
-              </button>
-            </li>
-          </ul>
-        </li>
+<li class="toc-chapter" data-chapter="chapter-2">
+  <div class="toc-chapter-header">
+    <div class="toc-chapter-title">فصل دوم: تکنیک‌های پرامپت‌نویسی</div>
+    <div class="toc-chapter-toggle">＋</div>
+  </div>
+  <ul class="toc-section-list">
+    <li class="toc-section-item">
+      <button class="toc-btn section-btn"
+              data-chapter="chapter-2"
+              data-section="section-2-1">
+        <span>مبحث ۱: Zero-shot Prompting</span>
+        <small>صفحات ۱۳–۱۴</small>
+      </button>
+    </li>
+
+    <li class="toc-section-item">
+      <button class="toc-btn section-btn"
+              data-chapter="chapter-2"
+              data-section="section-2-2">
+        <span>مبحث ۲: One-shot & Few-shot</span>
+        <small>صفحات ۱۵–۱۸</small>
+      </button>
+    </li>
+
+    <li class="toc-section-item">
+      <button class="toc-btn section-btn"
+              data-chapter="chapter-2"
+              data-section="section-2-3">
+        <span>مبحث ۳: System Prompting</span>
+        <small>صفحات ۱۸–۲۱</small>
+      </button>
+    </li>
+
+    <li class="toc-section-item">
+      <button class="toc-btn section-btn"
+              data-chapter="chapter-2"
+              data-section="section-2-4">
+        <span>مبحث ۴: Role Prompting</span>
+        <small>صفحات ۲۱–۲۳</small>
+      </button>
+    </li>
+
+    <li class="toc-section-item">
+      <button class="toc-btn section-btn"
+              data-chapter="chapter-2"
+              data-section="section-2-5">
+        <span>مبحث ۵: Contextual Prompting</span>
+        <small>صفحات ۲۳–۲۵</small>
+      </button>
+    </li>
+
+    <li class="toc-section-item">
+      <button class="toc-btn section-btn"
+              data-chapter="chapter-2"
+              data-section="section-2-6">
+        <span>مبحث ۶: جمع‌بندی فصل دوم</span>
+        <small>مرور</small>
+      </button>
+    </li>
+  </ul>
+</li>
 
         <!-- فصل سوم (مثال) -->
         <li class="toc-chapter" data-chapter="chapter-3">
@@ -732,29 +769,163 @@
 </article>
 
       <!-- فصل دوم -->
-      <article id="chapter-2" class="chapter">
-        <div class="chapter-header">
-          <h2 class="chapter-title">فصل دوم: عنوان فصل دوم</h2>
-          <div class="chapter-toggle">＋</div>
-        </div>
-        <div class="chapter-body">
-          <!-- مبحث ۱ -->
-          <section id="section-2-1" class="section">
-            <h3 class="section-title">مبحث ۱: عنوان مبحث اول فصل دوم</h3>
-            <p>
-              متن مبحث اول فصل دوم...
-            </p>
-          </section>
+<article id="chapter-2" class="chapter">
+  <div class="chapter-header">
+    <h2 class="chapter-title">فصل دوم: تکنیک‌های پرامپت‌نویسی (Prompting Techniques)</h2>
+    <div class="chapter-toggle">＋</div>
+  </div>
 
-          <!-- مبحث ۲ -->
-          <section id="section-2-2" class="section">
-            <h3 class="section-title">مبحث ۲: عنوان مبحث دوم فصل دوم</h3>
-            <p>
-              متن مبحث دوم فصل دوم...
-            </p>
-          </section>
-        </div>
-      </article>
+  <div class="chapter-body">
+
+    <!-- مبحث ۱ -->
+    <section id="section-2-1" class="section">
+      <h3 class="section-title">مبحث ۱: Zero-shot Prompting</h3>
+
+      <p>
+        Zero-shot یعنی هیچ مثالی نمی‌دهی؛ فقط دستور را می‌نویسی. مدل براساس دانش
+        قبلی‌اش تصمیم می‌گیرد.
+      </p>
+
+      <p>مثال:</p>
+      <p><strong>«این متن را مثبت، منفی یا خنثی طبقه‌بندی کن.»</strong></p>
+
+      <p>کجا استفاده می‌شود؟</p>
+      <ul>
+        <li>وقتی کار ساده است</li>
+        <li>وقتی مدل دانش اولیه دارد</li>
+        <li>وقتی نمی‌خواهی پرامپت طولانی شود</li>
+      </ul>
+
+      <p>
+        اما همیشه دقیق نیست؛ چون مدل ممکن است سبک دلخواه تو را حدس نزند.
+      </p>
+
+      <h4>🔵 توضیح تکمیلی طاویتا</h4>
+      <p>
+        Zero-shot مثل این است که بگویی: «برو چای خوب درست کن» بدون اینکه بگویی
+        چای پررنگ؟ کم‌رنگ؟ شیرین؟ اینجاست که خروجی ممکن است مطابق سلیقه‌ات نباشد.
+      </p>
+    </section>
+
+    <!-- مبحث ۲ -->
+    <section id="section-2-2" class="section">
+      <h3 class="section-title">مبحث ۲: One-shot & Few-shot Prompting</h3>
+
+      <p>
+        One-shot یعنی یک مثال می‌دهی و مدل را در مسیر قرار می‌دهی. Few-shot یعنی
+        چند مثال (معمولاً ۳ تا ۵) می‌دهی تا مدل الگو را کامل یاد بگیرد.
+      </p>
+
+      <p>مزیت‌ها:</p>
+      <ul>
+        <li>مدل دقیقاً می‌فهمد چه خروجی می‌خواهی</li>
+        <li>لحن، سبک و ساختار از مثال‌ها یاد گرفته می‌شود</li>
+        <li>احتمال خطا بسیار کم می‌شود</li>
+      </ul>
+
+      <h4>🔵 توضیح تکمیلی طاویتا</h4>
+      <p>
+        Few-shot یعنی تو داری «قانون تولید خروجی» را به مدل یاد می‌دهی.  
+        اگر مثال‌ها JSON باشند → مدل هم JSON می‌نویسد.  
+        اگر مثال‌ها خیلی خلاصه باشند → خروجی هم خلاصه می‌شود.
+      </p>
+    </section>
+
+    <!-- مبحث ۳ -->
+    <section id="section-2-3" class="section">
+      <h3 class="section-title">مبحث ۳: System Prompting (پرامپت سیستمی)</h3>
+
+      <p>
+        System prompt تعریف «وظیفه اصلی مدل» است. مثل اینکه بگویی:
+      </p>
+
+      <ul>
+        <li>«تو یک مترجم حرفه‌ای هستی.»</li>
+        <li>«فقط خروجی JSON بده.»</li>
+        <li>«همیشه علمی و دقیق بنویس.»</li>
+      </ul>
+
+      <p>
+        این دستور در ابتدای پرامپت می‌آید و رفتار کلی مدل را ثابت نگه می‌دارد.
+      </p>
+
+      <h4>🔵 توضیح تکمیلی طاویتا</h4>
+      <p>
+        System prompt مثل این است که به مدل بگویی:  
+        «این نقش توست، خارج نشو.»  
+        اگر بگویی «تو یک متخصص امنیت سایبری هستی»، مدل همه‌چیز را از دید امنیتی
+        می‌نویسد.
+      </p>
+    </section>
+
+    <!-- مبحث ۴ -->
+    <section id="section-2-4" class="section">
+      <h3 class="section-title">مبحث ۴: Role Prompting (تعیین نقش)</h3>
+
+      <p>
+        در Role Prompting به مدل می‌گویی شبیه چه شخصیتی رفتار کند:
+      </p>
+
+      <ul>
+        <li>«مثل یک نویسنده طنز صحبت کن.»</li>
+        <li>«مثل یک پزشک عمومی توضیح بده.»</li>
+        <li>«مثل یک مربی انگیزشی حرف بزن.»</li>
+      </ul>
+
+      <p>
+        این روش برای کنترل لحن، احساس و سبک نوشتن مدل فوق‌العاده است.
+      </p>
+
+      <h4>🔵 توضیح طاویتا</h4>
+      <p>
+        Role Prompting مثل این است که یک «ماسک شخصیتی» روی مدل بگذاری.  
+        حتی جواب‌های فنی هم می‌توانند شاعرانه، طنزآلود یا کودکانه شوند.
+      </p>
+    </section>
+
+    <!-- مبحث ۵ -->
+    <section id="section-2-5" class="section">
+      <h3 class="section-title">مبحث ۵: Contextual Prompting (پرامپت با زمینه)</h3>
+
+      <p>
+        Context یعنی دادن اطلاعات پس‌زمینه‌ای تا مدل دقیق بفهمد در چه شرایطی هستی:
+      </p>
+
+      <ul>
+        <li>«این متن مربوط به وبلاگ بازی‌های دهه ۸۰ است…»</li>
+        <li>«در ادامهٔ گفت‌وگوی قبلی…»</li>
+        <li>«اطلاعات اولیهٔ پروژه: …»</li>
+      </ul>
+
+      <p>با Context پاسخ‌ها دقیق‌تر و مرتبط‌تر می‌شوند.</p>
+
+      <h4>🔵 توضیح طاویتا</h4>
+      <p>
+        Context مثل دادن “پس‌زمینه ذهنی” به مدل است.  
+        اگر فقط بپرسی «سه موضوع مقاله بده» هر چیزی ممکن است بدهد.  
+        اما اگر بگویی:  
+        «در زمینهٔ بازی‌های کلاسیک دهه ۸۰، سه موضوع مقاله بده.»  
+        مدل دقیقاً هدف‌مند می‌شود.
+      </p>
+    </section>
+
+    <!-- مبحث ۶ -->
+    <section id="section-2-6" class="section">
+      <h3 class="section-title">مبحث ۶: جمع‌بندی فصل دوم</h3>
+
+      <ul>
+        <li>Zero-shot → سریع، ساده، اما نه‌چندان دقیق</li>
+        <li>One-shot & Few-shot → بهترین روش برای خروجی باثبات</li>
+        <li>System Prompt → تعیین چارچوب و رفتار کلی مدل</li>
+        <li>Role Prompt → تعیین لحن، شخصیت و سبک پاسخ</li>
+        <li>Contextual Prompt → دقیق‌ترین و هدفمندترین روش</li>
+      </ul>
+
+      <p>پرامپت خوب یعنی طراحی هوشمندانه مسیر ذهنی مدل.</p>
+    </section>
+
+  </div>
+</article>
 
       <!-- فصل سوم (مثال) -->
       <article id="chapter-3" class="chapter">
