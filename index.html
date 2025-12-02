@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>عنوان کتاب شما</title>
+
+  <!-- فونت وزیر -->
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Vazir, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f5; /* پس‌زمینه روشن */
+      color: #111827;      /* متن مشکی/تیره */
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+    }
+
+    /* هدر / کاور کتاب */
+    .hero {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .hero-cover {
+      width: 140px;
+      height: 200px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #e5e7eb;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+      flex-shrink: 0;
+    }
+
+    .hero-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-text {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .hero-text h1 {
+      margin: 0 0 8px;
+      font-size: 24px;
+    }
+
+    .hero-text p {
+      margin: 0;
+      font-size: 14px;
+      color: #4b5563;
+      line-height: 1.9;
+    }
+
+    /* فهرست کلی */
+    .toc {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 16px 14px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      margin-bottom: 24px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .toc h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 6px;
+    }
+
+    .toc-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc-chapter {
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed #e5e7eb;
+    }
+
+    .toc-chapter:last-child {
+      border-bottom: none;
+    }
+
+    .toc-chapter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      padding: 6px 2px;
+    }
+
+    .toc-chapter-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .toc-chapter-toggle {
+      font-size: 18px;
+      line-height: 1;
+      user-select: none;
+      color: #6b7280;
+    }
+
+    .toc-section-list {
+      list-style: none;
+      padding: 4px 8px 4px 0;
+      margin: 0;
+      display: none;
+    }
+
+    .toc-chapter.open .toc-section-list {
+      display: block;
+    }
+
+    .toc-section-item {
+      margin-bottom: 4px;
+    }
+
+    .toc-btn {
+      width: 100%;
+      text-align: right;
+      border: none;
+      background: transparent;
+      color: #111827;
+      padding: 6px 6px;
+      font-size: 13px;
+      cursor: pointer;
+      border-radius: 999px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toc-btn span {
+      flex: 1;
+    }
+
+    .toc-btn small {
+      font-size: 11px;
+      color: #9ca3af;
+      white-space: nowrap;
+    }
+
+    .toc-btn:hover {
+      background: #f3f4f6;
+    }
+
+    .toc-btn.active {
+      background: #111827;
+      color: #f9fafb;
+    }
+
+    /* فصل‌ها و متن */
+    .chapters {
+      margin-top: 10px;
+    }
+
+    .chapter {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 14px 14px 10px;
+      margin-bottom: 14px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    }
+
+    .chapter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .chapter-title {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .chapter-toggle {
+      font-size: 18px;
+      line-height: 1;
+      user-select: none;
+      color: #6b7280;
+    }
+
+    .chapter-body {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #111827;
+      line-height: 2;
+      display: none; /* اول بسته */
+      max-height: 65vh;
+      overflow-y: auto;
+      padding-top: 4px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .chapter.active .chapter-body {
+      display: block;
+    }
+
+    .section {
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: 15px;
+      margin: 0 0 6px;
+      font-weight: 600;
+    }
+
+    .section p {
+      margin: 0 0 8px;
+      text-align: justify;
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+
+      .hero-cover {
+        width: 110px;
+        height: 160px;
+      }
+
+      .hero-text h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- هدر و کاور کتاب -->
+    <header class="hero">
+      <div class="hero-cover">
+        <!-- عکس جلد کتابت رو اینجا بذار -->
+      <img src="https://cdnfa.com/irangiah/a9be/uploads/ketab/propm.webp" alt="جلد کتاب">
+      </div>
+
+      <div class="hero-text">
+        <h1>عنوان کتاب شما</h1>
+        <p>
+          اینجا یک توضیح کوتاه درباره کتاب می‌نویسی؛ مثلاً موضوع کلی، مخاطب کتاب
+          و این‌که قرار است خواننده چه چیزی از این کتاب بگیرد.
+        </p>
+      </div>
+    </header>
+
+    <!-- فهرست: فصل‌ها + مبحث‌ها -->
+    <section class="toc">
+      <h2>فهرست</h2>
+      <ul class="toc-list">
+
+        <!-- فصل اول -->
+        <li class="toc-chapter" data-chapter="chapter-1">
+          <div class="toc-chapter-header">
+            <div class="toc-chapter-title">فصل اول: عنوان فصل اول</div>
+            <div class="toc-chapter-toggle">＋</div>
+          </div>
+          <ul class="toc-section-list">
+            <li class="toc-section-item">
+              <button class="toc-btn section-btn"
+                      data-chapter="chapter-1"
+                      data-section="section-1-1">
+                <span>مبحث ۱: عنوان مبحث اول</span>
+                <small>مثلاً ۲ صفحه</small>
+              </button>
+            </li>
+            <li class="toc-section-item">
+              <button class="toc-btn section-btn"
+                      data-chapter="chapter-1"
+                      data-section="section-1-2">
+                <span>مبحث ۲: عنوان مبحث دوم</span>
+                <small>مثلاً ۳ صفحه</small>
+              </button>
+            </li>
+          </ul>
+        </li>
+
+        <!-- فصل دوم -->
+        <li class="toc-chapter" data-chapter="chapter-2">
+          <div class="toc-chapter-header">
+            <div class="toc-chapter-title">فصل دوم: عنوان فصل دوم</div>
+            <div class="toc-chapter-toggle">＋</div>
+          </div>
+          <ul class="toc-section-list">
+            <li class="toc-section-item">
+              <button class="toc-btn section-btn"
+                      data-chapter="chapter-2"
+                      data-section="section-2-1">
+                <span>مبحث ۱: عنوان مبحث اول فصل دوم</span>
+                <small>مثلاً ۴ صفحه</small>
+              </button>
+            </li>
+            <li class="toc-section-item">
+              <button class="toc-btn section-btn"
+                      data-chapter="chapter-2"
+                      data-section="section-2-2">
+                <span>مبحث ۲: عنوان مبحث دوم فصل دوم</span>
+                <small>مثلاً ۵ صفحه</small>
+              </button>
+            </li>
+          </ul>
+        </li>
+
+        <!-- فصل سوم (مثال) -->
+        <li class="toc-chapter" data-chapter="chapter-3">
+          <div class="toc-chapter-header">
+            <div class="toc-chapter-title">فصل سوم: عنوان فصل سوم</div>
+            <div class="toc-chapter-toggle">＋</div>
+          </div>
+          <ul class="toc-section-list">
+            <li class="toc-section-item">
+              <button class="toc-btn section-btn"
+                      data-chapter="chapter-3"
+                      data-section="section-3-1">
+                <span>مبحث ۱: عنوان مبحث اول فصل سوم</span>
+                <small>…</small>
+              </button>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+    </section>
+
+    <!-- متن فصل‌ها و مبحث‌ها -->
+    <section class="chapters">
+
+      <!-- فصل اول -->
+      <article id="chapter-1" class="chapter">
+        <div class="chapter-header">
+          <h2 class="chapter-title">فصل اول: عنوان فصل اول</h2>
+          <div class="chapter-toggle">＋</div>
+        </div>
+        <div class="chapter-body">
+          <!-- مبحث ۱ -->
+          <section id="section-1-1" class="section">
+            <h3 class="section-title">مبحث ۱: عنوان مبحث اول</h3>
+            <p>
+              اینجا متن مبحث اول فصل اول را می‌گذاری. می‌توانی متن را به چند پاراگراف
+              تقسیم کنی تا خواندن روی موبایل راحت‌تر باشد...
+            </p>
+            <p>
+              پاراگراف دوم متن این مبحث. هر چقدر خواستی ادامه بده.
+            </p>
+          </section>
+
+          <!-- مبحث ۲ -->
+          <section id="section-1-2" class="section">
+            <h3 class="section-title">مبحث ۲: عنوان مبحث دوم</h3>
+            <p>
+              اینجا متن مبحث دوم فصل اول است...
+            </p>
+          </section>
+
+          <!-- در صورت نیاز مبحث‌های بیشتری اضافه کن -->
+        </div>
+      </article>
+
+      <!-- فصل دوم -->
+      <article id="chapter-2" class="chapter">
+        <div class="chapter-header">
+          <h2 class="chapter-title">فصل دوم: عنوان فصل دوم</h2>
+          <div class="chapter-toggle">＋</div>
+        </div>
+        <div class="chapter-body">
+          <!-- مبحث ۱ -->
+          <section id="section-2-1" class="section">
+            <h3 class="section-title">مبحث ۱: عنوان مبحث اول فصل دوم</h3>
+            <p>
+              متن مبحث اول فصل دوم...
+            </p>
+          </section>
+
+          <!-- مبحث ۲ -->
+          <section id="section-2-2" class="section">
+            <h3 class="section-title">مبحث ۲: عنوان مبحث دوم فصل دوم</h3>
+            <p>
+              متن مبحث دوم فصل دوم...
+            </p>
+          </section>
+        </div>
+      </article>
+
+      <!-- فصل سوم (مثال) -->
+      <article id="chapter-3" class="chapter">
+        <div class="chapter-header">
+          <h2 class="chapter-title">فصل سوم: عنوان فصل سوم</h2>
+          <div class="chapter-toggle">＋</div>
+        </div>
+        <div class="chapter-body">
+          <!-- مبحث ۱ -->
+          <section id="section-3-1" class="section">
+            <h3 class="section-title">مبحث ۱: عنوان مبحث اول فصل سوم</h3>
+            <p>
+              متن مبحث اول فصل سوم...
+            </p>
+          </section>
+        </div>
+      </article>
+
+    </section>
+  </div>
+
+  <script>
+    const tocChapters = document.querySelectorAll(".toc-chapter");
+    const sectionButtons = document.querySelectorAll(".section-btn");
+    const chapters = document.querySelectorAll(".chapter");
+
+    function openChapter(chapterId) {
+      chapters.forEach(ch => {
+        const isTarget = ch.id === chapterId;
+        ch.classList.toggle("active", isTarget);
+        const toggleIcon = ch.querySelector(".chapter-toggle");
+        if (toggleIcon) {
+          toggleIcon.textContent = isTarget ? "－" : "＋";
+        }
+      });
+    }
+
+    function openSection(chapterId, sectionId) {
+      openChapter(chapterId);
+
+      // فعال‌کردن دکمه در فهرست
+      sectionButtons.forEach(btn => {
+        const isTarget =
+          btn.dataset.chapter === chapterId &&
+          btn.dataset.section === sectionId;
+        btn.classList.toggle("active", isTarget);
+      });
+
+      const sectionEl = document.getElementById(sectionId);
+      if (sectionEl) {
+        sectionEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    // باز و بسته کردن لیست مبحث‌ها برای هر فصل در فهرست
+    tocChapters.forEach(ch => {
+      const header = ch.querySelector(".toc-chapter-header");
+      const toggleIcon = ch.querySelector(".toc-chapter-toggle");
+
+      header.addEventListener("click", () => {
+        const isOpen = ch.classList.contains("open");
+        ch.classList.toggle("open", !isOpen);
+        if (toggleIcon) {
+          toggleIcon.textContent = isOpen ? "＋" : "－";
+        }
+      });
+    });
+
+    // کلیک روی مبحث در فهرست
+    sectionButtons.forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation(); // نذار کلیک روی هدر فصل هم حساب بشه
+        const chapterId = btn.dataset.chapter;
+        const sectionId = btn.dataset.section;
+        openSection(chapterId, sectionId);
+      });
+    });
+
+    // کلیک روی هدر خود فصل (در بخش متن)
+    chapters.forEach(ch => {
+      const header = ch.querySelector(".chapter-header");
+      const toggleIcon = ch.querySelector(".chapter-toggle");
+      header.addEventListener("click", () => {
+        const isActive = ch.classList.contains("active");
+        ch.classList.toggle("active", !isActive);
+        if (toggleIcon) {
+          toggleIcon.textContent = isActive ? "＋" : "－";
+        }
+      });
+    });
+
+    // اگر خواستی یک فصل/مبحث به صورت پیش‌فرض باز باشد، این را فعال کن:
+    // openSection("chapter-1", "section-1-1");
+  </script>
+</body>
+</html>
